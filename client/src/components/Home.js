@@ -40,6 +40,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
+
     if (!this.props.user.id) {
       // If we were previously logged in, redirect to login instead of register
       if (this.state.isLoggedIn) return <Redirect to="/login" />;
