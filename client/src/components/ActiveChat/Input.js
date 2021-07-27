@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
 
+
 const styles = {
   root: {
     justifySelf: "flex-end",
@@ -40,9 +41,10 @@ class Input extends Component {
       conversationId: this.props.conversationId,
       sender: this.props.conversationId ? null : this.props.user,
     };
-    await this.props.postMessage(reqBody);
+    if(reqBody.text) 
+      await this.props.postMessage(reqBody);
     this.setState({
-      text: "",
+      text: ""
     });
   };
 
