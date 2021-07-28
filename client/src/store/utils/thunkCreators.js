@@ -109,6 +109,17 @@ export const postMessage = (body) => async(dispatch) => {
   }
 };
 
+export const markMessagesAsRead = async (conversationId, senderId) => {
+  try {
+    const { data }  = await axios.put("/api/messages", {
+      conversationId, senderId});
+    
+    return data;
+  } catch (error) {
+    console.error(error)
+  }
+};
+
 export const searchUsers = (searchTerm) => async (dispatch) => {
   try {
     const { data } = await axios.get(`/api/users/${searchTerm}`);

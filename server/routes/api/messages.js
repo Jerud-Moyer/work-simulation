@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
 
+
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
 router.post("/", async (req, res, next) => {
   try {
@@ -39,6 +40,19 @@ router.post("/", async (req, res, next) => {
       isRead,
     });
     res.json({ message, sender });
+  } catch (error) {
+    next(error);
+  }
+})
+.put("/", async(req, res, next) => {
+  try {
+    const { conversationId, senderId } = req.body;
+    console.log('back', req.body )
+    const readMessages = await Message.update(
+      { isRead: true },
+      { returning: true, where: { conversationId: conversationId, senderId: senderId }}
+    );
+    res.json(readMessages);
   } catch (error) {
     next(error);
   }
