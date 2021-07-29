@@ -47,7 +47,6 @@ router.post("/", async (req, res, next) => {
 .put("/", async(req, res, next) => {
   try {
     const { conversationId, senderId } = req.body;
-    console.log('back', req.body )
     const readMessages = await Message.update(
       { isRead: true },
       { returning: true, where: { conversationId: conversationId, senderId: senderId }}
