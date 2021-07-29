@@ -44,6 +44,7 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 })
+//this is to mark messages as read
 .put("/", async(req, res, next) => {
   try {
     const { conversationId, senderId } = req.body;
