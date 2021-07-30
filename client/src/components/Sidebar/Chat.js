@@ -23,13 +23,13 @@ const styles = {
 class Chat extends Component {
   constructor(props) {
     super(props);
-    this.state = {noUnRead: false}
+    this.state = {noUnRead: false, markedMessages: []}
   };
 
   handleClick = async (conversation) => {
-    await this.props.setActiveChat(conversation.otherUser.username);
-    await markMessagesAsRead(conversation.id, conversation.otherUser.id);
-    this.setState({ noUnRead: true });
+    const markedMessages = await markMessagesAsRead(conversation.id, conversation.otherUser.id);
+    await this.props.setActiveChat(conversation.otherUser.username);  
+    this.setState({ noUnRead: true, markedMessages });
   };
 
   render() {
@@ -38,6 +38,7 @@ class Chat extends Component {
     const unReads = this.props.conversation.messages.filter(
       message => (!message.isRead && message.senderId === otherUser.id)
     ).length;
+    const newConvo = {...this.props.conversation, messages: this.state.markedMessages}
     
     return (
       <Box
@@ -50,7 +51,11 @@ class Chat extends Component {
           online={otherUser.online}
           sidebar={true}
         />
-        <ChatContent conversation={this.props.conversation} />
+        <ChatContent 
+          conversation={!this.state.markedMessages.length
+            ? this.props.conversation
+            : newConvo} 
+        />
         {!this.state.noUnRead && unReads > 0 &&
           <Badge 
             badgeContent={unReads} 
