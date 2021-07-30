@@ -27,9 +27,13 @@ class Chat extends Component {
   };
 
   handleClick = async (conversation) => {
+    await this.props.setActiveChat(conversation.otherUser.username);
+    if(!conversation.messages.every(message => message.isRead)) {
     const markedMessages = await markMessagesAsRead(conversation.id, conversation.otherUser.id);
-    await this.props.setActiveChat(conversation.otherUser.username);  
     this.setState({ noUnRead: true, markedMessages });
+    }else{
+      this.setState({ noUnRead: true })
+    }
   };
 
   render() {
