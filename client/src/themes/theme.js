@@ -14,6 +14,9 @@ export const theme = createMuiTheme({
     MuiInput: {
       input: {
         fontWeight: "bold"
+      },
+      label: {
+        marginBottom: 50
       }
     }
   },

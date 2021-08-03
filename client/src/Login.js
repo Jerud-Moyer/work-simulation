@@ -9,11 +9,26 @@ import {
   FormControl,
   TextField,
   makeStyles,
+  InputAdornment,
+  withStyles,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 
-const useStyles = makeStyles((theme) => ({
+const CssTextField = withStyles({
   root: {
+    width: '60%',
+    '& label.Mui-focused': {
+      color: "#B0B0B0",
+      top: -20
+    },
+    '& MuiInput-underline:after': {
+      borderBottomColor: '#3A8DFF'
+    },
+  }
+})(TextField);
+
+const useStyles = makeStyles((theme) => ({
+  outerBox: {
     display: "flex",
     flexDirection: "row",
     width: "100vw",
@@ -108,6 +123,12 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     marginBottom: 30,
   },
+  link: {
+    textDecoration: "none",
+    fontSize: 12,
+    color: "#3A8DFF",
+    appearance: "none",
+  },
   input: {
     appearance: "none",
     border: "none",
@@ -137,7 +158,7 @@ const Login = (props) => {
   return (
     <Grid 
       container justify="center" 
-      className={classes.root}
+      className={classes.outerBox}
     >
       
         <Box className={classes.graphicBox}>
@@ -166,34 +187,68 @@ const Login = (props) => {
           >Create account
           </Button>
         </Grid>
-        <form onSubmit={handleLogin} className={classes.formOuter}>
+        <form className={classes.formOuter} onSubmit={handleLogin}>
             <Grid container item className={classes.formInner}>
               <Typography className={classes.welcome}>Welcome back!</Typography>
-              
-                <TextField
+              <FormControl style={classes.root} >
+                <CssTextField
                   className={classes.inputField}
                   aria-label="username"
                   label="Username"
                   name="username"
-                  color="secondary"
+                  id="username"
+                  InputProps={{
+                    fontWeight: "bold",
+                  }}
                 />
-              
-            <FormControl margin="normal" required className={classes.inputField}>
+              </FormControl>
+              <FormControl>
+                <CssTextField
+                  className={classes.inputField}
+                  aria-label="password"
+                  label="Password"
+                  name="Password"
+                  id="passsword"
+                  color="primary"
+                  variant="standard"
+                  InputProps={{
+                    type: "password",
+                    fontWeight: "bold",
+                    fontSize: 36,
+                    endAdornment: 
+                    <InputAdornment position=   {'end'}>
+                        <a 
+                          className={classes.link}
+                          href={'/help'} 
+                          alt={'help Link'}
+                          >
+                          Forgot?
+                        </a>
+                      </InputAdornment>
+                  }}
+                  />
+              </FormControl>
+            {/* <FormControl margin="normal" required className={classes.inputField}>
               <label htmlFor="password">Password</label>
               <input
-                id="password"
-                className={classes.input}
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
+              id="password"
+              className={classes.input}
+              label="password"
+              aria-label="password"
+              type="password"
+              name="password"
               />
-            </FormControl>
+            </FormControl> */}
               <Grid>
-                <Button type="submit" variant="contained" size="large">
-                  Login
+                <Button 
+                  type="submit" 
+                  variant="contained" 
+                  size="large"
+                >
+                    Login
                 </Button>
               </Grid>
+            
             </Grid>
         </form>
       </Box>
