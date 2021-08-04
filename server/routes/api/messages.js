@@ -45,7 +45,7 @@ router.post("/", async (req, res, next) => {
   }
 })
 //this is to mark messages as read
-.put("/", async(req, res, next) => {
+router.put("/read", async(req, res, next) => {
   try {
     const { conversationId, senderId } = req.body;
     const readMessages = await Message.update(
