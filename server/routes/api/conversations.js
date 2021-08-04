@@ -23,6 +23,16 @@ router.get("/", async (req, res, next) => {
       order: [[Message, "createdAt", "DESC"]],
       include: [
         { model: Message, order: ["createdAt", "DESC"] },
+        // {
+        //   model: Message,
+        //   as: "unReadByUser1", 
+        //   where: {
+        //     id: {
+        //       [Op.not]: userId,
+        //     },
+        //     isRead: false
+        //   },
+        // },
         {
           model: User,
           as: "user1",
@@ -72,7 +82,7 @@ router.get("/", async (req, res, next) => {
       convoJSON.latestMessageText = convoJSON.messages[0].text;
       conversations[i] = convoJSON;
     }
-
+    console.log('yowza', conversations)
     res.json(conversations);
   } catch (error) {
     next(error);
