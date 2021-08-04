@@ -6,26 +6,43 @@ import {
   Box,
   Typography,
   Button,
-  FormControl,
   TextField,
   makeStyles,
   InputAdornment,
   withStyles,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import AuthGraphic from "./AuthGraphic";
 
-const CssTextField = withStyles({
+const CssTextField = withStyles((theme) => ({
   root: {
-    width: '60%',
+    fullWidth: true,
+    '& label': {
+      top: -26,
+      color: "#B0B0B0",
+      fontSize: 22,
+      fontWeight: 'bold',
+    },
     '& label.Mui-focused': {
       color: "#B0B0B0",
-      top: -20
     },
     '& MuiInput-underline:after': {
-      borderBottomColor: '#3A8DFF'
+      borderBottomColor: '#3A8DFF',
+      borderBottomWeight: 10
     },
   }
-})(TextField);
+}))(TextField);
+
+const BigButton = withStyles((theme) => ({
+  root: {
+    width: 185,
+    height: 65,
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bolder',
+    
+  },
+}))(Button);
 
 const useStyles = makeStyles((theme) => ({
   outerBox: {
@@ -33,47 +50,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     width: "100vw",
     justifyContent: "center"
-  },
-  graphicBox: {
-    alignItems: "center",
-    width: "42%",
-    maxHeight: "100vh",
-    background: "url(./assets/bg-img.png)",
-    backgroundColor: "rgba(87, 161, 235, .6)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-
-  },
-  graphicInner: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "rgba(83, 149, 241, .85)",
-  },
-  iconOuter: {
-   display: "flex",
-   flexDirection: "column",
-   width: "7%",
-   position: "absolute",
-   top: "30%",
-   left: "17.5%",
-  },
-  textBox: {
-    position: "absolute",
-    top: "45.5%",
-    left: 0,
-    right: 0,
-    width: "42%"
-  },
-  headline: {
-    fontSize: 32,
-    color: "white",
-    textAlign: "center",
-    marginTop: "1%"
-  },
-  icon: {
-  
   },
   formBox: {
     display: "flex",
@@ -86,15 +62,18 @@ const useStyles = makeStyles((theme) => ({
   nav: {
     position: "absolute",
     top: "5%",
-    left: "66%",
-    width: "32%",
+    left: "61%",
+    width: "35%",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-between"
   },
   navText: {
     color: "#B0B0B0",
+    fontWeight: 'bold',
   },
   create: {
+    fontWeight: 'bold',
+    fontSize: 16,
     color: "#3A8DFF",
     border: "none",
     boxShadow: "0 0 2px 4px rgba(0, 0, 0, .05)",
@@ -105,37 +84,36 @@ const useStyles = makeStyles((theme) => ({
   formOuter: {
     width: "90%",
     alignSelf: "center",
+    marginBottom: 60,
   },
   formInner: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    
   },
   welcome: {
     fontSize: 32,
     fontWeight: 600,
-    marginBottom: 30,
+    marginBottom: 50,
     textAlign: "left",
-    width: "60%"
+    width: "100%"
   },
   inputField: {
-    width: "60%",
-    marginBottom: 30,
+    width: 500,
+    marginBottom: 50,
+    marginTop: 18,
   },
   link: {
     textDecoration: "none",
-    fontSize: 12,
+    fontSize: 13,
     color: "#3A8DFF",
-    appearance: "none",
+    fontWeight: "bold"
   },
-  input: {
-    appearance: "none",
-    border: "none",
-    outline: "none",
-    fill: "none",
-    background: "none",
-  }
+  submitButton: {
+    boxShadow: "none",
+    padding: 30,
+    height: 200
+  },
 }))
 
 const Login = (props) => {
@@ -157,26 +135,11 @@ const Login = (props) => {
 
   return (
     <Grid 
-      container justify="center" 
+      container
+      justify="center" 
       className={classes.outerBox}
     >
-      
-        <Box className={classes.graphicBox}>
-          <Grid className={classes.graphicInner}>
-            <Grid className={classes.iconOuter}>
-              <img 
-                alt="bubble-graphic" 
-                src="./assets/bubble.svg"
-                className={classes.icon}
-              />
-            </Grid>
-            <Grid className={classes.textBox}>
-              <Typography className={classes.headline} >Converse with anyone</Typography>
-              <Typography className={classes.headline} >with any language</Typography>
-            </Grid>
-          </Grid>
-        </Box>
-      
+      <AuthGraphic />
       <Box container item className={classes.formBox}>
         <Grid container item className={classes.nav} >
           <Typography className={classes.navText} >Don't have an account?</Typography>
@@ -187,36 +150,27 @@ const Login = (props) => {
           >Create account
           </Button>
         </Grid>
-        <form className={classes.formOuter} onSubmit={handleLogin}>
+        <form className={[classes.formOuter, classes.root]} onSubmit={handleLogin}>
             <Grid container item className={classes.formInner}>
               <Typography className={classes.welcome}>Welcome back!</Typography>
-              <FormControl style={classes.root} >
                 <CssTextField
                   className={classes.inputField}
                   aria-label="username"
                   label="Username"
                   name="username"
-                  id="username"
-                  InputProps={{
-                    fontWeight: "bold",
-                  }}
+                  type="text"
                 />
-              </FormControl>
-              <FormControl>
+            
+              
                 <CssTextField
                   className={classes.inputField}
                   aria-label="password"
                   label="Password"
-                  name="Password"
-                  id="passsword"
-                  color="primary"
-                  variant="standard"
+                  name="password"
+                  type="password"
                   InputProps={{
-                    type: "password",
-                    fontWeight: "bold",
-                    fontSize: 36,
                     endAdornment: 
-                    <InputAdornment position=   {'end'}>
+                    <InputAdornment position={'end'}>
                         <a 
                           className={classes.link}
                           href={'/help'} 
@@ -224,29 +178,22 @@ const Login = (props) => {
                           >
                           Forgot?
                         </a>
-                      </InputAdornment>
+                    </InputAdornment>
                   }}
                   />
-              </FormControl>
-            {/* <FormControl margin="normal" required className={classes.inputField}>
-              <label htmlFor="password">Password</label>
-              <input
-              id="password"
-              className={classes.input}
-              label="password"
-              aria-label="password"
-              type="password"
-              name="password"
-              />
-            </FormControl> */}
+             
+          
               <Grid>
-                <Button 
+                <BigButton
+                  className="submitButton" 
                   type="submit" 
                   variant="contained" 
                   size="large"
+                  color="primary"
+                  disableElevation
                 >
                     Login
-                </Button>
+                </BigButton>
               </Grid>
             
             </Grid>

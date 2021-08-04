@@ -9,10 +9,51 @@ import {
   FormControl,
   TextField,
   FormHelperText,
+  withStyles,
+  makeStyles,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
+import AuthGraphic from "./AuthGraphic";
+import { clearSearchedUsers } from "./store/conversations";
+
+const CssTextField = withStyles((theme) => ({
+  root: {
+    fullWidth: true,
+    '& label': {
+      top: -26,
+      color: "#B0B0B0",
+      fontSize: 22,
+      fontWeight: 'bold',
+    },
+    '& label.Mui-focused': {
+      color: "#B0B0B0",
+    },
+    '& MuiInput-underline:after': {
+      borderBottomColor: '#3A8DFF',
+      borderBottomWeight: 10
+    },
+  }
+}))(TextField);
+
+const useStyles = makeStyles((theme) => ({
+  outerBox: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100vw",
+    justifyContent: "center"
+  },
+  formBox: {
+    display: "flex",
+    flexDirection: "column",
+    width: "58%",
+    height: "100vh",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+}))
 
 const Login = (props) => {
+  const classes = useStyles();
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -37,8 +78,13 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
+    <Grid 
+      container 
+      justify={'center'}
+      className={classes.outerBox}
+    >
+      <AuthGraphic />
+      <Box className={classes.formBox} >
         <Grid container item>
           <Typography>Need to log in?</Typography>
           <Button onClick={() => history.push("/login")}>Login</Button>
@@ -47,7 +93,7 @@ const Login = (props) => {
           <Grid>
             <Grid>
               <FormControl>
-                <TextField
+                <CssTextField
                   aria-label="username"
                   label="Username"
                   name="username"
@@ -58,7 +104,7 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl>
-                <TextField
+                <CssTextField
                   label="E-mail address"
                   aria-label="e-mail address"
                   type="email"
@@ -69,7 +115,7 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
+                <CssTextField
                   aria-label="password"
                   label="Password"
                   type="password"
