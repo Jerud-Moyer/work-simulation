@@ -43,7 +43,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: "white",
     textAlign: "center",
-    
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 25
+    }
   },
 }));
 

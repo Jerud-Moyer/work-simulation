@@ -12,9 +12,8 @@ import {
   withStyles,
   makeStyles,
 } from "@material-ui/core";
-import { register } from "./store/utils/thunkCreators";
+import { register } from "../../store/utils/thunkCreators";
 import AuthGraphic from "./AuthGraphic";
-import { clearSearchedUsers } from "./store/conversations";
 
 const CssTextField = withStyles((theme) => ({
   root: {
@@ -35,6 +34,17 @@ const CssTextField = withStyles((theme) => ({
   }
 }))(TextField);
 
+const BigButton = withStyles((theme) => ({
+  root: {
+    width: 185,
+    height: 65,
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bolder',
+    
+  },
+}))(Button);
+
 const useStyles = makeStyles((theme) => ({
   outerBox: {
     display: "flex",
@@ -49,6 +59,64 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     justifyContent: "center",
     alignItems: "center"
+  },
+  nav: {
+    position: "absolute",
+    top: "4%",
+    left: "60%",
+    width: "36%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down('sm')]: {
+      top: "2%"
+    }
+  },
+  navText: {
+    color: "#B0B0B0",
+    fontWeight: 'bold',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: 15
+    }
+  },
+  create: {
+    fontWeight: 900,
+    fontSize: 16,
+    color: "#3A8DFF",
+    border: "none",
+    boxShadow: "0 0 4px 6px rgba(0, 0, 0, .05)",
+    height: 60,
+    padding: 20,
+    width: 200
+  },
+  formOuter: {
+    width: "90%",
+    alignSelf: "center",
+  },
+  formInner: {
+    marginTop: 70,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  welcome: {
+    fontSize: 32,
+    fontWeight: 900,
+    marginBottom: 30,
+    textAlign: "left",
+    width: "100%",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 24,
+      marginBottom: 20,
+    }
+  },
+  inputField: {
+    width: 500,
+    marginBottom: 30,
+    marginTop: 18,
+    [theme.breakpoints.down('sm')]: {
+      width: 200,
+      marginBottom: 20
+    }
   },
 }))
 
@@ -85,15 +153,32 @@ const Login = (props) => {
     >
       <AuthGraphic />
       <Box className={classes.formBox} >
-        <Grid container item>
-          <Typography>Need to log in?</Typography>
-          <Button onClick={() => history.push("/login")}>Login</Button>
+        <Grid container item className={classes.nav}>
+          <Typography className={classes.navText} >
+            Already have an account?
+          </Typography>
+          <Button 
+            onClick={() => history.push("/login")}
+            type="submit"   
+            variant="outlined" 
+            size="large"
+            className={classes.create}w
+          >
+            Login
+          </Button>
         </Grid>
-        <form onSubmit={handleRegister}>
-          <Grid>
+        <form 
+          className={[classes.formOuter, classes.root]} 
+          onSubmit={handleRegister}
+        >
+          <Grid container item className={classes.formInner}>
+            <Typography className={classes.welcome}>
+              Create an account.
+            </Typography>
             <Grid>
               <FormControl>
                 <CssTextField
+                  className={classes.inputField}
                   aria-label="username"
                   label="Username"
                   name="username"
@@ -105,6 +190,7 @@ const Login = (props) => {
             <Grid>
               <FormControl>
                 <CssTextField
+                  className={classes.inputField}
                   label="E-mail address"
                   aria-label="e-mail address"
                   type="email"
@@ -116,6 +202,7 @@ const Login = (props) => {
             <Grid>
               <FormControl error={!!formErrorMessage.confirmPassword}>
                 <CssTextField
+                  className={classes.inputField}
                   aria-label="password"
                   label="Password"
                   type="password"
@@ -130,7 +217,8 @@ const Login = (props) => {
             </Grid>
             <Grid>
               <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
+                <CssTextField
+                  className={classes.inputField}
                   label="Confirm Password"
                   aria-label="confirm password"
                   type="password"
@@ -143,9 +231,13 @@ const Login = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Button type="submit" variant="contained" size="large">
+            <BigButton 
+              type="submit" variant="contained" size="large"
+              color="primary"
+              disableElevation
+            >
               Create
-            </Button>
+            </BigButton>
           </Grid>
         </form>
       </Box>

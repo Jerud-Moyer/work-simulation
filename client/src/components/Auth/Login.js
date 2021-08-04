@@ -10,8 +10,9 @@ import {
   makeStyles,
   InputAdornment,
   withStyles,
+  FormControl,
 } from "@material-ui/core";
-import { login } from "./store/utils/thunkCreators";
+import { login } from "../../store/utils/thunkCreators";
 import AuthGraphic from "./AuthGraphic";
 
 const CssTextField = withStyles((theme) => ({
@@ -40,7 +41,6 @@ const BigButton = withStyles((theme) => ({
     marginTop: 20,
     fontSize: 18,
     fontWeight: 'bolder',
-    
   },
 }))(Button);
 
@@ -61,22 +61,25 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     position: "absolute",
-    top: "5%",
+    top: "4%",
     left: "61%",
     width: "35%",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   navText: {
     color: "#B0B0B0",
     fontWeight: 'bold',
+    [theme.breakpoints.down('md')]: {
+      marginBottom: 15
+    }
   },
   create: {
-    fontWeight: 'bold',
+    fontWeight: 900,
     fontSize: 16,
     color: "#3A8DFF",
     border: "none",
-    boxShadow: "0 0 2px 4px rgba(0, 0, 0, .05)",
+    boxShadow: "0 0 4px 6px rgba(0, 0, 0, .05)",
     height: 60,
     padding: 20,
     width: 200
@@ -84,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
   formOuter: {
     width: "90%",
     alignSelf: "center",
-    marginBottom: 60,
   },
   formInner: {
     flexDirection: "column",
@@ -93,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
   welcome: {
     fontSize: 32,
-    fontWeight: 600,
+    fontWeight: 900,
     marginBottom: 50,
     textAlign: "left",
     width: "100%"
@@ -102,17 +104,15 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     marginBottom: 50,
     marginTop: 18,
+    [theme.breakpoints.down('sm')]: {
+      width: 200
+    }
   },
   link: {
     textDecoration: "none",
-    fontSize: 13,
+    fontSize: 14,
     color: "#3A8DFF",
     fontWeight: "bold"
-  },
-  submitButton: {
-    boxShadow: "none",
-    padding: 30,
-    height: 200
   },
 }))
 
@@ -142,17 +142,23 @@ const Login = (props) => {
       <AuthGraphic />
       <Box container item className={classes.formBox}>
         <Grid container item className={classes.nav} >
-          <Typography className={classes.navText} >Don't have an account?</Typography>
+          <Typography className={classes.navText} >
+            Don't have an account?
+          </Typography>
           <Button 
             onClick={() => history.push("/register")}
             type="submit" variant="outlined" size="large"
             className={classes.create}
-          >Create account
+          >
+            Create account
           </Button>
         </Grid>
         <form className={[classes.formOuter, classes.root]} onSubmit={handleLogin}>
             <Grid container item className={classes.formInner}>
-              <Typography className={classes.welcome}>Welcome back!</Typography>
+              <Typography className={classes.welcome}>
+                Welcome back!
+              </Typography>
+              <FormControl>
                 <CssTextField
                   className={classes.inputField}
                   aria-label="username"
@@ -160,8 +166,8 @@ const Login = (props) => {
                   name="username"
                   type="text"
                 />
-            
-              
+              </FormControl>
+              <FormControl>
                 <CssTextField
                   className={classes.inputField}
                   aria-label="password"
@@ -181,11 +187,9 @@ const Login = (props) => {
                     </InputAdornment>
                   }}
                   />
-             
-          
+                </FormControl>
               <Grid>
-                <BigButton
-                  className="submitButton" 
+                <BigButton 
                   type="submit" 
                   variant="contained" 
                   size="large"
@@ -195,7 +199,6 @@ const Login = (props) => {
                     Login
                 </BigButton>
               </Grid>
-            
             </Grid>
         </form>
       </Box>
