@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const { User, Conversation, Message } = require("../../db/models");
-const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 const onlineUsers = require("../../onlineUsers");
-
+const { Op } = sequelize;
 // get all conversations for a user, include latest message text for preview, and all messages
 // include other user model so we have info on username/profile pic (don't include current user info)
 // TODO: for scalability, implement lazy loading
@@ -19,16 +19,19 @@ router.get("/", async (req, res, next) => {
           user2Id: userId,
         },
       },
-      attributes: ["id"],
+      attributes: {include: ["id",
+      //  [sequelize.fn('COUNT', sequelize.col('isRead')),'unread']
+    ]},
       order: [[Message, "createdAt", "DESC"]],
       include: [
         { model: Message, order: ["createdAt", "DESC"] },
+        
         // {
         //   model: Message,
-        //   as: "unReadByUser1", 
+        //   as: "unreadMessages", 
         //   where: {
-        //     id: {
-        //       [Op.not]: userId,
+        //     [Op.not]: {
+        //       user1: userId,
         //     },
         //     isRead: false
         //   },

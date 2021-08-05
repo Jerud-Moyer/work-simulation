@@ -56,7 +56,7 @@ class Chat extends Component {
           sidebar={true}
         />
         <ChatContent 
-          conversation={!this.state.markedMessages.length
+          conversation={!this.state.markedMessages
             ? this.props.conversation
             : newConvo} 
         />
