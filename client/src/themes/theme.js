@@ -21,5 +21,21 @@ export const theme = createTheme({
   palette: {
     primary: { main: "#3A8DFF" },
     secondary: { main: "#B0B0B0" }
+  },
+  authPage: {
+    outerBox: {
+      display: "flex",
+      flexDirection: "row",
+      width: "100vw",
+      justifyContent: "center",
+    },
+    formBox: {
+      display: "flex",
+      flexDirection: "column",
+      width: "58%",
+      height: "100vh",
+      justifyContent: "center",
+      alignItems: "center"
+    },
   }
 });
