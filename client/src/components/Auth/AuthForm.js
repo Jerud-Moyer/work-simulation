@@ -16,8 +16,11 @@ const CssTextField = withStyles((theme) => ({
     '& label': {
       top: -26,
       color: theme.palette.secondary.main,
-      fontSize: 22,
+      fontSize: 18,
       fontWeight: 'bold',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 20,
+      }
     },
     '& label.Mui-focused': {
       color: theme.palette.secondary.main,
@@ -36,6 +39,9 @@ const BigButton = withStyles((theme) => ({
     marginTop: 20,
     fontSize: 18,
     fontWeight: 'bolder',
+    [theme.breakpoints.down('sm')]: {
+      width: 170,
+    }
   },
 }))(Button);
 
@@ -56,8 +62,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     width: "100%",
     [theme.breakpoints.down('sm')]: {
-      fontSize: 24,
-      marginBottom: 20,
+      fontSize: 20,
+      marginBottom: 30,
+      
     }
   },
   inputField: {
@@ -70,6 +77,10 @@ const useStyles = makeStyles((theme) => ({
   },
   signupElement: {
     marginBottom: 30,
+    marginTop: 20,
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 10,
+    }
   },
   link: {
     textDecoration: "none",

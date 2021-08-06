@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     width: "100vw",
     justifyContent: "center",
-    
   },
   formBox: theme.authPage.formBox
 }))

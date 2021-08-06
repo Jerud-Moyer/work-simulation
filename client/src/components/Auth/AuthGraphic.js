@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "rgba(87, 161, 235, .6)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    [theme.breakpoints.down('sm')]: {
+      
+    }
   },
   graphicInner: {
     display: "flex",
@@ -31,13 +34,23 @@ const useStyles = makeStyles((theme) => ({
    position: "absolute",
    top: "29%",
    left: "17.5%",
+   [theme.breakpoints.down('sm')]: {
+     width: "20%",
+     top: "22%",
+     left: "11%",
+   }
   },
   textBox: {
     position: "absolute",
     top: "43%",
     left: 0,
     right: 0,
-    width: "42%"
+    width: "42%",
+    [theme.breakpoints.down('sm')]: {
+      width: "38%",
+      top: "38%",
+      left: "2%",
+    }
   },
   headline: {
     fontSize: 30,

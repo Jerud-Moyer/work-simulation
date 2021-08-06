@@ -12,18 +12,25 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: "4%",
     left: "63%",
-    width: "33%",
+    width: "35%",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    [theme.breakpoints.down('sm')]: {
+      width: "50%",
+      left: "45%",
+    }
   },
   navText: {
     color: theme.palette.secondary.main,
     fontWeight: 'bold',
+    textAlign: "center",
+    textWrap: "wrap",
+    maxWidth: "100%",
     [theme.breakpoints.down('md')]: {
       marginBottom: 15
     }
   },
-  create: {
+  button: {
     fontWeight: 900,
     fontSize: 16,
     color: theme.palette.primary.main,
@@ -31,7 +38,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 0 4px 6px rgba(0, 0, 0, .05)",
     height: 60,
     padding: 20,
-    width: 200
+    width: 200,
+    marginLeft: 30,
+    [theme.breakpoints.down('sm')]: {
+      width: 160,
+      marginLeft: 0,
+    }
   },
 }));
 
@@ -46,7 +58,7 @@ const Nav = ({message, destinationPath, forSignUp}) => {
           <Button 
             onClick={() => history.push(destinationPath)}
             type="submit" variant="outlined" size="large"
-            className={classes.create}
+            className={classes.button}
           >
             {
               forSignUp
