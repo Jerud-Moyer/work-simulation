@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     boxShadow: "0 0 4px 6px rgba(0, 0, 0, .05)",
     height: 60,
-    padding: 20,
+    padding: theme.spacing(2.5),
     width: 200,
-    marginLeft: 30,
+    marginLeft: theme.spacing(3.75),
     [theme.breakpoints.down('sm')]: {
       width: 160,
       marginLeft: 0,

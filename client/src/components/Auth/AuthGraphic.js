@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  Avatar,
   Box, 
   Grid, 
   makeStyles, 
@@ -34,11 +33,15 @@ const useStyles = makeStyles((theme) => ({
    position: "absolute",
    top: "29%",
    left: "17.5%",
+   
    [theme.breakpoints.down('sm')]: {
      width: "20%",
      top: "22%",
      left: "11%",
    }
+  },
+  icon: {
+    height: "100%",
   },
   textBox: {
     position: "absolute",
@@ -71,9 +74,8 @@ const AuthGraphic = () => {
           <Grid className={classes.graphicInner}>
             <Grid className={classes.iconOuter}>
               <img 
-                alt="bubble-graphic" 
-                src="./assets/bubble.svg"
-                className={classes.icon}
+                src={'./assets/bubble.svg'}
+                alt={'bubble graphic'}
               />
             </Grid>
             <Grid className={classes.textBox}>

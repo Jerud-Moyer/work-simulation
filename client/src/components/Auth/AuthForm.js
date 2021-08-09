@@ -36,7 +36,7 @@ const BigButton = withStyles((theme) => ({
   root: {
     width: 185,
     height: 65,
-    marginTop: 20,
+    marginTop: theme.spacing(2.5),
     fontSize: 18,
     fontWeight: 'bolder',
     [theme.breakpoints.down('sm')]: {
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   welcome: {
     fontSize: 32,
     fontWeight: 900,
-    marginBottom: 50,
+    marginBottom: theme.spacing(6.25),
     textAlign: "left",
     width: "100%",
     [theme.breakpoints.down('sm')]: {
@@ -69,15 +69,15 @@ const useStyles = makeStyles((theme) => ({
   },
   inputField: {
     width: 500,
-    marginBottom: 50,
-    marginTop: 18,
+    marginBottom: theme.spacing(6.25),
+    marginTop: theme.spacing(2.2),
     [theme.breakpoints.down('sm')]: {
       width: 200
     }
   },
   signupElement: {
-    marginBottom: 30,
-    marginTop: 20,
+    marginBottom: theme.spacing(3.75),
+    marginTop: theme.spacing(2.5),
     [theme.breakpoints.down('sm')]: {
       marginBottom: 10,
     }
