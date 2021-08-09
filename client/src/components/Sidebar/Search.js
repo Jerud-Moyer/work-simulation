@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import { FormControl, FilledInput, InputAdornment } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { 
+  FilledInput, 
+  FormControl, 
+  InputAdornment, 
+  makeStyles,
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   filledInput: {
     height: 50,
     background: "#E9EEF9",
@@ -14,7 +18,7 @@ const styles = {
     letterSpacing: 0,
     display: "flex",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: theme.spacing(2.5),
   },
   input: {
     "&::placeholder": {
@@ -22,21 +26,21 @@ const styles = {
       opacity: 1,
     },
   },
-};
+}));
 
-class Search extends Component {
-  handleSubmit = (event) => {
-    event.preventDefault();
-  };
+const Search = ({ handleChange }) => {
+  const classes = useStyles();
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <form onSubmit={this.handleSubmit}>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
         <FormControl fullWidth hiddenLabel>
           <FilledInput
             name="search"
-            onChange={this.props.handleChange}
+            onChange={handleChange}
             classes={{ root: classes.filledInput, input: classes.input }}
             disableUnderline
             placeholder="Search"
@@ -48,8 +52,7 @@ class Search extends Component {
           ></FilledInput>
         </FormControl>
       </form>
-    );
-  }
+  )
 }
 
-export default withStyles(styles)(Search);
+export default Search;
