@@ -88,6 +88,7 @@ const sendMessage = (data, body) => {
     message: data.message,
     recipientId: body.recipientId,
     sender: data.sender,
+    isRead: false,
   });
 };
 
@@ -105,6 +106,17 @@ export const postMessage = (body) => async(dispatch) => {
     sendMessage(data, body);
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const markMessagesAsRead = async (conversationId, senderId) => {
+  try {
+    const { data }  = await axios.put("/api/messages", {
+      conversationId, senderId});
+    
+    return data;
+  } catch (error) {
+    console.error(error)
   }
 };
 

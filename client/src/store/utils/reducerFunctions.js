@@ -16,7 +16,7 @@ export const addMessageToStore = (state, payload) => {
       const convoCopy = { ...convo };
       convoCopy.messages.push(message);
       convoCopy.latestMessageText = message.text;
-
+      convoCopy.messages = convoCopy.messages.sort((a, b) => a.createdAt - b.createdAt);
       return convoCopy;
     } else {
       return convo;
@@ -75,6 +75,7 @@ export const addNewConvoToStore = (state, recipientId, message) => {
       newConvo.id = message.conversationId;
       newConvo.messages.push(message);
       newConvo.latestMessageText = message.text;
+      newConvo.messages = newConvo.messages.sort((a, b) => a.createdAt - b.createdAt);
       return newConvo;
     } else {
       return convo;

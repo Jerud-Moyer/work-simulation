@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@material-ui/core";
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
     fontSize: 14,
@@ -13,12 +13,29 @@ export const theme = createMuiTheme({
   overrides: {
     MuiInput: {
       input: {
-        fontWeight: "bold"
-      }
+        fontWeight: "bold",
+        backgroundColor: "none"
+      },
     }
   },
   palette: {
     primary: { main: "#3A8DFF" },
     secondary: { main: "#B0B0B0" }
+  },
+  authPage: {
+    outerBox: {
+      display: "flex",
+      flexDirection: "row",
+      width: "100vw",
+      justifyContent: "center",
+    },
+    formBox: {
+      display: "flex",
+      flexDirection: "column",
+      width: "58%",
+      height: "100vh",
+      justifyContent: "center",
+      alignItems: "center"
+    },
   }
 });
