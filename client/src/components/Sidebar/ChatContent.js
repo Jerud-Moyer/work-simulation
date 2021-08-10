@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
 
 const ChatContent = (props) => {
   const classes = useStyles();
-  const { conversation } = props;
+  const { conversation, noUnRead } = props;
   const { latestMessageText, otherUser, messages } = conversation;
   const allRead = messages.filter(
     message => message.senderId === otherUser.id
-    ).every(message => message.isRead)
+    ).every(message => message.isRead === true);
     
   return (
     <Box className={classes.root}>
@@ -38,7 +38,7 @@ const ChatContent = (props) => {
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
-        <Typography className={allRead 
+        <Typography className={(noUnRead || allRead) 
           ? classes.previewText
           : [classes.previewText, classes.unreadPreviewText]
         }>
