@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(6.25),
     marginTop: theme.spacing(2.2),
     [theme.breakpoints.down('sm')]: {
-      width: 200
+      width: 300
     }
   },
   signupElement: {
@@ -137,7 +137,7 @@ const AuthForm = ({
                   type="password"
                   InputProps={{
                     endAdornment: 
-                      <InputAdornment    position={'end'}>
+                      <InputAdornment position={'end'}>
                         <Button 
                           className={classes.link}
                           href={'/help'} 

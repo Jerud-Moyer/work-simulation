@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  graphicBox: {
+  sideBar: {
     alignItems: "center",
     width: "42%",
     maxHeight: "100vh",
@@ -16,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     [theme.breakpoints.down('sm')]: {
-      
+      display: "none"
     }
   },
-  graphicInner: {
+  sideBarNext: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
     backgroundColor: "rgba(83, 149, 241, .85)",
   },
-  iconOuter: {
+  chatBubbleIconWrapper: {
    display: "flex",
    flexDirection: "column",
    width: "6.5%",
@@ -39,9 +39,6 @@ const useStyles = makeStyles((theme) => ({
      top: "22%",
      left: "11%",
    }
-  },
-  icon: {
-    height: "100%",
   },
   textBox: {
     position: "absolute",
@@ -70,9 +67,9 @@ const AuthGraphic = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.graphicBox}>
-          <Grid className={classes.graphicInner}>
-            <Grid className={classes.iconOuter}>
+    <Box className={classes.sideBar}>
+          <Grid className={classes.sideBarNext}>
+            <Grid className={classes.chatBubbleIconWrapper}>
               <img 
                 src={'./assets/bubble.svg'}
                 alt={'bubble graphic'}

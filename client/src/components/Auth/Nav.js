@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: "35%",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: "50%",
       left: "45%",
     }
