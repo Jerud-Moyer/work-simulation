@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Box,
@@ -12,23 +12,22 @@ import Nav from "./Nav";
 import AuthForm from "./AuthForm";
 import { selectUser } from "../../store/utils/selectors";
 
-
 const useStyles = makeStyles((theme) => ({
   outerBox: theme.authPage.outerBox,
   formBox: theme.authPage.formBox
 }))
 
-const Login = (props) => {
+const Login = () => {
   const classes = useStyles();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
 
-    await dispatch(login({ username, password }));
+    dispatch(login({ username, password }));
   };
 
   if (user.id) {
