@@ -19,22 +19,20 @@ router.get("/", async (req, res, next) => {
           user2Id: userId,
         },
       },
-      attributes: {include: ["id",
+      attributes: ["id",
       //  [sequelize.fn('COUNT', sequelize.col('isRead')),'unread']
-    ]},
+    ],
       order: [[Message, "createdAt", "DESC"]],
       include: [
         { model: Message, order: ["createdAt", "DESC"] },
-        
+  
         // {
         //   model: Message,
-        //   as: "unreadMessages", 
-        //   where: {
-        //     [Op.not]: {
-        //       user1: userId,
-        //     },
-        //     isRead: false
-        //   },
+        //   attributes: {
+        //     include: [
+        //       [sequelize.fn('COUNT', sequelize.col('isRead')),'unread']
+        //     ]
+        //   }
         // },
         {
           model: User,
