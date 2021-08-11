@@ -20,20 +20,10 @@ router.get("/", async (req, res, next) => {
         },
       },
       attributes: ["id",
-      //  [sequelize.fn('COUNT', sequelize.col('isRead')),'unread']
     ],
       order: [[Message, "createdAt", "DESC"]],
       include: [
         { model: Message, order: ["createdAt", "DESC"] },
-  
-        // {
-        //   model: Message,
-        //   attributes: {
-        //     include: [
-        //       [sequelize.fn('COUNT', sequelize.col('isRead')),'unread']
-        //     ]
-        //   }
-        // },
         {
           model: User,
           as: "user1",
@@ -83,7 +73,7 @@ router.get("/", async (req, res, next) => {
       convoJSON.latestMessageText = convoJSON.messages[0].text;
       conversations[i] = convoJSON;
     }
-    console.log('yowza', conversations)
+   
     res.json(conversations);
   } catch (error) {
     next(error);
