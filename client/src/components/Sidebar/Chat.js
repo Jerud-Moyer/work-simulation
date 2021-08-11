@@ -23,13 +23,17 @@ const styles = {
 class Chat extends Component {
   constructor(props) {
     super(props);
-    this.state = {noUnRead: false}
+    this.state = {noUnRead: false, markedMessages: []}
   };
 
-  handleClick = async (conversation) => {
+  handleClick = async (conversation, unReads) => {
     await this.props.setActiveChat(conversation.otherUser.username);
-    await markMessagesAsRead(conversation.id, conversation.otherUser.id);
-    this.setState({ noUnRead: true });
+    if(unReads) {
+    const markedMessages = markMessagesAsRead(conversation.id, conversation.otherUser.id);
+    this.setState({ noUnRead: true, markedMessages: markedMessages });
+    }else{
+      this.setState({ noUnRead: true })
+    }
   };
 
   render() {
@@ -41,7 +45,7 @@ class Chat extends Component {
     
     return (
       <Box
-        onClick={() => this.handleClick(this.props.conversation)}
+        onClick={() => this.handleClick(this.props.conversation, unReads)}
         className={classes.root}
       >
         <BadgeAvatar
@@ -50,8 +54,11 @@ class Chat extends Component {
           online={otherUser.online}
           sidebar={true}
         />
-        <ChatContent conversation={this.props.conversation} />
-        {!this.state.noUnRead && unReads > 0 &&
+        <ChatContent 
+          conversation={this.props.conversation} 
+          noUnRead={this.state.noUnRead}
+        />
+        {!this.state.noUnRead && unReads > 0 && 
           <Badge 
             badgeContent={unReads} 
             color="primary"
