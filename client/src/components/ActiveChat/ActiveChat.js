@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectActiveConversation, selectConversations, selectUser } from "../../store/utils/selectors";
 
 const useStyles = makeStyles(() => ({
@@ -54,16 +54,5 @@ const ActiveChat = () => {
     </Box>
   );
 };
-
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user,
-//     conversation:
-//       state.conversations &&
-//       state.conversations.find(
-//         (conversation) => conversation.otherUser.username === state.activeConversation
-//       )
-//   };
-// };
 
 export default ActiveChat;
