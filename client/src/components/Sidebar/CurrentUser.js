@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { BadgeAvatar } from "./index";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { selectUser } from "../../store/utils/selectors";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,10 +33,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const CurrentUser = (props) => {
+const CurrentUser = () => {
   const classes = useStyles();
-
-  const user = props.user || {};
+  const user = useSelector(selectUser) || {};
 
   return (
     <Box className={classes.root}>
@@ -48,10 +48,4 @@ const CurrentUser = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  };
-};
-
-export default connect(mapStateToProps)(CurrentUser);
+export default CurrentUser;
