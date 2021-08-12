@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Box,
@@ -10,6 +10,7 @@ import { register } from "../../store/utils/thunkCreators";
 import AuthGraphic from "./AuthGraphic";
 import Nav from "./Nav";
 import AuthForm from "./AuthForm";
+import { selectUser } from "../../store/utils/selectors";
 
 const useStyles = makeStyles((theme) => ({
   outerBox: {
@@ -21,9 +22,10 @@ const useStyles = makeStyles((theme) => ({
   formBox: theme.authPage.formBox
 }))
 
-const Login = (props) => {
+const Login = () => {
   const classes = useStyles();
-  const { user, register } = props;
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
   const handleRegister = async (event) => {
@@ -38,7 +40,7 @@ const Login = (props) => {
       return;
     }
 
-    await register({ username, email, password });
+    dispatch(register({ username, email, password }));
   };
 
   if (user.id) {
@@ -68,18 +70,4 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    register: (credentials) => {
-      dispatch(register(credentials));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
