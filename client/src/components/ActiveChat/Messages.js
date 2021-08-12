@@ -9,11 +9,11 @@ const Messages = (props) => {
   
   return (
     <Box>
-      {messages.sort((a, b) => a.id - b.id).map((message, index) => {
+      {messages.map((message, index) => {
         const time = moment(message.createdAt).format("h:mm");
 
         return message.senderId === userId ? (
-          <SenderBubble key={message.id} text={message.text} time={time} otherUser={otherUser} lastOne={lastIndex === index } />
+          <SenderBubble key={message.id} text={message.text} time={time} otherUser={otherUser} lastOne={lastIndex === index }/>
         ) : (
           <OtherUserBubble key={message.id} text={message.text} time={time} otherUser={otherUser} />
         );

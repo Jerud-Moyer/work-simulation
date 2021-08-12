@@ -55,6 +55,7 @@ const Chat = ({ conversation }) => {
         conversation={conversation}
       />
       {!noUnread && unReads > 0 &&
+
           <Badge 
             badgeContent={unReads} 
             color="primary"
